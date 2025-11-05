@@ -14,6 +14,3 @@ def get_db():
     finally:
         db.close()
 
-import model
-
-Base.metadata.create_all(bind=engine)
