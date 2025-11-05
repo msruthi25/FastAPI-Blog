@@ -15,17 +15,18 @@ This is the **backend for a production-grade blog platform** built using FastAPI
 
 ## 📂 Current Folder Structure 
 backend/
-├── app/
-│ ├── main.py # FastAPI entry point
-│ ├── databaseSetup.py # SQLite connection setup
-│ ├── model.py # SQLAlchemy ORM models
-│ ├── schemas.py # Pydantic validation models
-│ ├── routes/
-│ │ ├── posts_routes.py # Posts API routes
-│ │ ├── user_routes.py # User API routes
-│ │ └── comments_routes.py # Comments API routes
-├── requirements.txt # Project dependencies
-└── README.md # Project documentation
+│
+├── app/                        # FastAPI app                                                                                                                                                                                  
+│   ├── main.py                 # Entry point                                                                                                                                                                                  
+│   ├── databaseSetup.py        # Database connection                                                                                                                                                                          
+│   ├── model.py                # SQLAlchemy models                                                                                                                                                                            
+│   ├── schemas.py              # Pydantic validation                                                                                                                                                                          
+│   ├── routes/                 # API routes                                                                                                                                                                                   
+│   │   ├── posts_routes.py
+│   │   ├── user_routes.py
+│   │   └── comments_routes.py
+├── requirements.txt            # Dependencies
+└── README.md                   # Project documentation
 
 
 ## ⚙️ Setup Instructions
