@@ -14,8 +14,8 @@ This is the **backend for a production-grade blog platform** built using FastAPI
 
 
 ## 📂 Current Folder Structure 
-backend/
-│
+```
+backend/ 
 ├── app/                        # FastAPI app                                                                                                                                                                                  
 │   ├── main.py                 # Entry point                                                                                                                                                                                  
 │   ├── databaseSetup.py        # Database connection                                                                                                                                                                          
@@ -27,7 +27,7 @@ backend/
 │   │   └── comments_routes.py
 ├── requirements.txt            # Dependencies
 └── README.md                   # Project documentation
-
+```
 
 ## ⚙️ Setup Instructions
 1. Create & activate virtual environment
