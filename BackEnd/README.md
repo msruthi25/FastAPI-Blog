@@ -21,11 +21,11 @@ backend/
 │ ├── model.py # SQLAlchemy ORM models
 │ ├── schemas.py # Pydantic validation models
 │ ├── routes/
-│ │ ├── posts_routes
-│ │ ├── user_routes.py
-│ │ └── comments_routes.py
-├── requirements.txt
-└── README.md
+│ │ ├── posts_routes.py # Posts API routes
+│ │ ├── user_routes.py # User API routes
+│ │ └── comments_routes.py # Comments API routes
+├── requirements.txt # Project dependencies
+└── README.md # Project documentation
 
 
 ## ⚙️ Setup Instructions
@@ -45,19 +45,17 @@ backend/
 
 
 ## 🔧API Endpoints
-..............................................................................
-Endpoint                       | Method   | Auth Required | Description
-................................|.........|..............|.................................
-/api/v1/register                | POST    | ❌            | Register a new user
-/api/v1/login                   | POST    | ✅            | Login
-/api/v1/posts/                  | GET     | ❌            | List all posts
-/api/v1/posts/{id}              | GET     | ❌            | Retrieve post details
-/api/v1/posts/                  | POST    | ✅            | Create a new post
-/api/v1/posts/{id}              | PUT     | ✅            | Update a post
-/api/v1/posts/{id}              | DELETE  | ✅            | Delete a post
-/api/v1/posts/{id}/comments/    | GET     | ❌            | List comments for a post
-/api/v1/posts/{id}/comments/    | POST    | ✅            | Add a comment to a post
-/api/v1/comments/{id}           | PUT     | ✅            | Update a comment
-/api/v1/comments/{id}           | DELETE  | ✅            | Delete a comment
-..............................................................................
+| Endpoint                     | Method | Auth Required | Description                    |
+|-------------------------------|-------|---------------|------------------------------- |
+| /api/v1/register              | POST  | ❌             | Register a new user          |
+| /api/v1/login                 | POST  | ✅             | Login                        |
+| /api/v1/posts/                | GET   | ❌             | List all posts               |
+| /api/v1/posts/{id}            | GET   | ❌             | Retrieve post details        |
+| /api/v1/posts/                | POST  | ✅             | Create a new post            |
+| /api/v1/posts/{id}            | PUT   | ✅             | Update a post                |
+| /api/v1/posts/{id}            | DELETE| ✅             | Delete a post                |
+| /api/v1/posts/{id}/comments/  | GET   | ❌             | List comments for a post     |
+| /api/v1/posts/{id}/comments/  | POST  | ✅             | Add a comment to a post      |
+| /api/v1/comments/{id}         | PUT   | ✅             | Update a comment             |
+| /api/v1/comments/{id}         | DELETE| ✅             | Delete a comment             |
 
