@@ -21,13 +21,9 @@ class PostResponse(BaseModel):  #Sending post responses
 class PostModel(BaseModel):  #Creating Post
     title:str
     content:str
-    author_id:int
     published:bool
 
-
 class Comments(BaseModel):  #Add Comments
-    post_id:int
-    user_id:int
     content:str
 
 
