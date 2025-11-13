@@ -17,9 +17,14 @@ class Post(Base):
     title = Column(String)
     content = Column(String)
     author_id = Column(Integer,ForeignKey("users.id"))
+    img_url=Column(String)
     published =  Column(Boolean, default=True)
     created_at=Column(DateTime, server_default=func.now())
     user = relationship("User")
+    comments = relationship(
+        "Comment",      
+        cascade="all, delete-orphan"
+    )
 
 class Comment(Base):
     __tablename__="comments"
@@ -28,5 +33,5 @@ class Comment(Base):
     user_id=Column(Integer,ForeignKey("users.id"))
     content=Column(String)
     created_at=Column(DateTime, server_default=func.now())
-    
+    user = relationship('User')
 

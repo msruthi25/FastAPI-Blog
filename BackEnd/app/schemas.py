@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel,EmailStr
 from datetime import datetime
 
@@ -15,15 +16,26 @@ class PostResponse(BaseModel):  #Sending post responses
     title:str
     content:str
     author_id:int
+    img_url:str
     published:bool
     created_at:datetime
 
 class PostModel(BaseModel):  #Creating Post
     title:str
     content:str
+    img_url:str
     published:bool
 
 class Comments(BaseModel):  #Add Comments
     content:str
 
+class CommentsResponse(BaseModel):
+    id: int
+    content: str
+    username: str    
+    created_at:datetime
 
+class PostUpdateModel(BaseModel):
+    title:str
+    content:str
+    img_url:str

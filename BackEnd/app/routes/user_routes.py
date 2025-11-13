@@ -17,8 +17,8 @@ def login(user:UserLogin,db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     if not hashing.verify_password(user.password_hash,user_data.password_hash):
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    jwt_handler.generate_token(user_data.username,user_data.id)
-    return RedirectResponse("/", status_code=303)
+    access_token=jwt_handler.generate_token(user_data.username,user_data.id)
+    return {"access_token":access_token,"username":user_data.username,"user_id":user_data.id}
 
 @router.post("/register")
 async def register(user: UserCreate ,db: Session = Depends(get_db)):
