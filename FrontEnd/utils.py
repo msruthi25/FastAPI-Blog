@@ -16,6 +16,7 @@ def init_session():
     st.session_state.setdefault("comment_input",None)
     st.session_state.setdefault("comment_delete",None)
     st.session_state.setdefault("success_key",None)
+    st.session_state.setdefault("account_register",None)
 
 
 def fetch_posts():

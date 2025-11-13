@@ -11,9 +11,12 @@ st.set_page_config(page_title="My Tech Blog", layout="wide")
 
 with open("styles.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-   
+ 
 
 render_header()
+
+if st.session_state["account_register"]:
+    st.success("Account Created Successfully! Login to access Account")
 
 show_all_posts()
 st.markdown("<br>", unsafe_allow_html=True)

@@ -41,6 +41,19 @@ def signup_dialog():
         elif new_password != confirm_password:
             st.error("❌ Passwords do not match.")
         elif new_username and email and new_password:
-            st.success(f"🎉 Account created successfully for {new_username}!")
+            try:
+                response = requests.post(
+                    "http://127.0.0.1:8000/register",
+                    json={"email": email, "username": new_username, "password_hash": new_password},
+                )                
+                if response.status_code == 200:
+                    st.session_state["account_register"]=True
+                    st.rerun()
+                elif response.status_code == 400:
+                    st.error("❌ This email or username is already taken.")
+                else:
+                    st.error(f"❌ Error: {response.text}")
+            except requests.exceptions.RequestException as e:
+                st.error(f"⚠️ An error occurred: {str(e)}")        
         else:
             st.error("❌ Please fill out all fields.")
