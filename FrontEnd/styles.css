@@ -1,0 +1,314 @@
+/* Input Fields */
+.stTextInput > div > div > input,
+.stPasswordInput > div > div > input {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%; /* Makes input fields full-width */
+    box-sizing: border-box; /* Ensures padding doesn't break layout */
+}
+
+/* Labels */
+.stTextInput label,
+.stPasswordInput label {
+    font-weight: 600;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Checkbox Labels */
+.stCheckbox > label {
+    font-size: 15px;
+    margin-left: 0.3rem;
+}
+
+/* Buttons */
+.stButton > button {
+    background-color: black;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.stP
+
+/* Button Hover Effect */
+.stButton > button:hover {
+    background-color: #45a049;
+}
+
+/* Optional: Form Container Styling */
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+      
+.post-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px 0px 15px 25px;
+    border-bottom: 1px solid #e0e0e0;
+    max-width: 900px;
+    margin: auto;
+    cursor: pointer; /* whole post is clickable */
+    transition: background-color 0.2s ease;
+}
+.post-content {
+    flex: 3;
+    padding-right: 20px;
+}
+.post-content h3 {
+    margin: 0 0 6px 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+}
+.post-content p {
+    color: #444;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 4px;
+
+    /* Limit to 2 lines */
+    display: -webkit-box;          /* old WebKit */
+    -webkit-box-orient: vertical;  /* old WebKit */
+    -webkit-line-clamp: 2;         /* old WebKit */
+    overflow: hidden;
+
+    display: box;                  /* fallback for old browsers */
+    box-orient: vertical;          /* fallback */
+    line-clamp: 2;                 /* standard property */
+}
+
+.read-more-inline {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #007bff;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+.read-more-inline:hover {
+    text-decoration: underline;
+}
+.post-image {
+    flex: 1;
+}
+.post-image img {
+    width: 140px;
+    height: 100px;
+    object-fit: contain; /* Keep entire image visible */
+    border-radius: 6px;
+    background-color: #f0f0f0; /* optional, to show empty space around image */
+}
+
+/* --- Header styles (full width) --- */
+.full-width-header {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem 2rem;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+/* --- Post content container (centered, constrained) --- */
+.post-detail-container {
+    max-width: 900px;    /* content width */
+    margin: 2rem auto;   /* center horizontally with spacing */
+    width: 100%;
+    padding: 0 1rem;     /* small side padding for small screens */
+}
+
+/* Post title */
+.post-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Meta info */
+.meta-info {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1px;
+}
+
+/* Post image */
+.post-detail-image {
+    width: 90%;
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+/* Post content */
+.post-content-full {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* Comments Section */
+h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+/* Make the main Streamlit block-container full width */
+.block-container {
+    max-width: 100% !important;
+    padding-left: 2rem;  /* optional padding */
+    padding-right: 2rem; /* optional padding */
+}
+
+
+
+    .cards-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;  
+        gap: 20px; 
+        width: 100%;           /* Make container full width */
+        justify-content: center;
+    }
+    .post-card {
+        max-width: 900px;
+        display: flex;
+        flex-direction: row;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+    }
+    .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+    .post-content {
+        flex: 2;
+        padding-right: 15px;
+    }
+    .post-image img {
+    width: 240px;
+    height: 150px;
+    object-fit: contain; /* Keep entire image visible */
+    border-radius: 6px;
+    background-color: #f0f0f0; /* optional, to show empty space around image */
+    }
+    .read-more-inline {
+        color: #1E90FF;
+        font-weight: bold;
+    }
+
+ 
+.comment-section {
+    margin: 1rem auto 0rem;   
+    width: 100%;
+    padding: 0 1rem;
+    max-width:900px;
+    border-radius: 10px;
+}
+.comment-card {
+    margin: 2rem auto;   /* center horizontally with spacing */
+    width: 100%;
+    padding: 0 1rem;
+    max-width:900px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+
+.comment-author {
+    font-weight: 700;
+    color: #7a8ba6;          /* subtle bluish-gray */
+    text-transform: uppercase;
+    margin-bottom: 0px;
+    font-size: 0.9rem;
+}
+.comment-date {
+    font-size: 0.7rem;
+    color: #7a8ba6;
+    text-transform: uppercase;
+    margin-top: 1px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+.comment-content {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 1rem;
+}
+hr.comment-divider {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 0 0 20px 0;
+}
+.comments-list-container {
+    max-width: 900px;
+    margin: 0 auto !important; /* center horizontally */
+    padding: 0 15px;
+}
+
+.section-divider {
+    padding:20px !important;
+    max-width: 900px;
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 0 auto !important;
+}
+
+div[class*="st-popover"] button {
+    background-color: black;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    margin: 0;        /* remove extra spacing */
+    width: 100%;      /* make button full width inside popover */
+}
+
+div[class*="st-popover"] button:hover {
+    background-color: #222;  /* slightly lighter black on hover */
+}
+    .stFormSubmitButton > button {
+        background-color: black; /* Green background */
+        color: white; /* White text */
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .stFormSubmitButton > button:hover {
+        background-color: #2b2828 !important;  /* Darker green on hover */
+    }
+hr.popover-divider {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 0 0 15px 0;
+}
+hr.post-divider {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 0 0 20px 0;
+    width:100%;
+}
