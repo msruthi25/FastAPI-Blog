@@ -39,3 +39,4 @@ class PostUpdateModel(BaseModel):
     title:str
     content:str
     img_url:str
+    author_id:int
