@@ -4,13 +4,10 @@ from pages.header import render_header
 import requests
 
 init_session()
-
-
 with open("styles.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 render_header()
-
 if st.session_state.logged_in:
     col1, col2, col3 = st.columns([1, 3, 1])
 

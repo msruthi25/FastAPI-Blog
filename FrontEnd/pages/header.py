@@ -7,24 +7,56 @@ init_session()
 with open("styles.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 def render_header():
-    header_col1, header_col2 = st.columns([7, 4])
+    header_col1, header_col2,header_col3 = st.columns([1,2,1])
     with header_col1:
         st.markdown("<h1  style='font-size:28px;'>🧠 My Tech Blog</h1>", unsafe_allow_html=True)
     with header_col2:
         with st.container(horizontal=True): 
-            st.space("stretch")
+                st.space("stretch")
+                if  st.session_state.logged_in:
+                    col1, col2, col3, col4= st.columns([1,1,1,1])  
+                    with col1:                         
+                        CSS = """
+                        div[class*="st-key-group1"] .stButton button {
+                            background: #ffffff;
+                            border: none; 
+                            color:#31333f !important;                               
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;                                
+                            transition-duration: 0.4s;
+                            cursor: pointer; 
+                        }div[class*="st-key-group1"] .stButton button:hover{
+                                background-color: #ffffff !important;                     
+                            }                         
+                        """
+                        st.html(f"<style>{CSS}</style>")
+                        if st.button(f"**Comment**", key="group1-i"):                                 
+                                    st.switch_page("pages/view_comments.py")                      
+                            
+                    with col2:
+                        if st.button(f"**All posts**", key="group1-f"):                                 
+                                    st.switch_page("pages/home.py") 
+                    with col3:
+                        if st.button(f"**My posts**", key="group1-g"):                                 
+                                    st.switch_page("pages/view_post.py")
+                    with col4:
+                        if st.button(f"**Write Post**", key="group1-h"):                                 
+                                    st.switch_page("pages/createpost.py")
+    with header_col3:  
+       with st.container(horizontal=True): 
+            st.space("stretch") 
             if not st.session_state.logged_in:
                 if st.button("🔐 Login"):
                     login_dialog()
             if not st.session_state.logged_in:
                 if st.button("🆕 Sign Up"):
-                    signup_dialog()
-            else:  
-                
-                col1, col2 = st.columns([6, 5])  
-
-                with col1:                        
-                        with stylable_container(
+                    signup_dialog()                             
+            if  st.session_state.logged_in:        
+                col1, col2 = st.columns([1,1])                                 
+                with col1:
+                    with stylable_container(
                             key="black_popover",
                             css_styles="""
                                 button{
@@ -42,24 +74,6 @@ def render_header():
                                 }"""):
                             po = st.popover(label='My Account')                           
                             po.markdown(f"**Hi, {st.session_state['user'].capitalize()}**") 
-
-                            CSS = """
-                            div[class*="st-key-group1"] .stButton button {
-                               background: #ffffff;
-                                border: none; 
-                                color:#31333f !important;                               
-                                text-align: center;
-                                text-decoration: none;
-                                display: inline-block;
-                                font-size: 16px;                                
-                                transition-duration: 0.4s;
-                                cursor: pointer; 
-                            }div[class*="st-key-group1"] .stButton button:hover{
-                                    background-color: #ffffff !important;                     
-                                } 
-                            
-                            """
-                            st.html(f"<style>{CSS}</style>")
                             if po.button(f"📃**View All posts**", key="group1-a"):                                 
                                  st.switch_page("pages/home.py")
                             po.markdown("""<hr class="popover-divider">""", unsafe_allow_html=True)
@@ -76,10 +90,10 @@ def render_header():
                                 st.session_state.logged_in = False
                                 st.session_state.token = ""
                                 st.session_state.user = None
-                                st.switch_page("app.py")         
+                                st.switch_page("app.py")                                                      
                     
                 with col2:
-                        if st.button("🚪 Logout"):
+                        if st.button("Logout"):
                             st.session_state.logged_in = False
                             st.session_state.token = ""
                             st.session_state.user = None

@@ -17,6 +17,7 @@ render_header()
 
 if st.session_state["account_register"]:
     st.success("Account Created Successfully! Login to access Account")
+    st.session_state["account_register"]=False
 
 show_all_posts()
 st.markdown("<br>", unsafe_allow_html=True)

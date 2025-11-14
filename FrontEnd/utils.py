@@ -17,6 +17,7 @@ def init_session():
     st.session_state.setdefault("comment_delete",None)
     st.session_state.setdefault("success_key",None)
     st.session_state.setdefault("account_register",None)
+    st.session_state.setdefault("success_key_comment",None)
 
 
 def fetch_posts():
@@ -147,3 +148,15 @@ def update_comment(comment_id, post_id,content, token=None):
         st.error(f"❌ Error connecting to backend: {e}")  
 
 
+def delete_comment(id,token=None):
+    try:
+        url= f"http://127.0.0.1:8000/deleteComment/{id}"
+        headers = {}
+        if token:             
+            headers = {
+                "Authorization": f"{token['token_type'].capitalize()} {token['access_token']}"
+            }
+        response = requests.delete(url,headers=headers)
+        return response    
+    except requests.exceptions.RequestException as e:
+        st.error(f"❌ Error connecting to backend: {e}")  
