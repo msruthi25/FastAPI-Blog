@@ -44,6 +44,7 @@ if st.session_state.logged_in:
     col1, col2, col3 = st.columns([1, 3, 1])
     
     with col2:
+      if response:  
         data = response.json()
         try:
             if data.get("status") == "success":

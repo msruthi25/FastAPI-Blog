@@ -46,7 +46,7 @@ def confirm_delete(post_id):
 if st.session_state.logged_in:
     st.markdown("<h2 style='text-align:center;'>📝  Your Posts</h2>", unsafe_allow_html=True)
     user_id=st.session_state["user_id"]
-    posts =fetch_posts_by_User_ID(user_id)
+    posts =fetch_posts_by_User_ID(user_id,token=st.session_state["token"])
     headercol1,headercol2,headercol3 =st.columns([1,2,1])
     with headercol2:
         st.markdown('<div class="cards-container">', unsafe_allow_html=True)  # Start container

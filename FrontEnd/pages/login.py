@@ -12,7 +12,7 @@ def login_dialog():
 
     if st.button("Login", key="login_submit"):
         if email  and password:
-            response = requests.post(f"http://127.0.0.1:8000/login", json={"email": email, "password_hash": password})
+            response = requests.post(f"http://127.0.0.1:8000/login", json={"email": email, "password": password})
             if response.status_code == 200:
                 token = response.json()["access_token"]
                 username=response.json()["username"]
@@ -44,7 +44,7 @@ def signup_dialog():
             try:
                 response = requests.post(
                     "http://127.0.0.1:8000/register",
-                    json={"email": email, "username": new_username, "password_hash": new_password},
+                    json={"email": email, "username": new_username, "password": new_password},
                 )                
                 if response.status_code == 200:
                     st.session_state["account_register"]=True

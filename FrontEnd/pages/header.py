@@ -7,12 +7,12 @@ init_session()
 with open("styles.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 def render_header():
-    header_col1, header_col2,header_col3 = st.columns([1,2,1])
+    header_col1, header_col2,header_col3 = st.columns([1,2,1.5])
     with header_col1:
         st.markdown("<h1  style='font-size:28px;'>🧠 My Tech Blog</h1>", unsafe_allow_html=True)
     with header_col2:
         with st.container(horizontal=True): 
-                st.space("stretch")
+                
                 if  st.session_state.logged_in:
                     col1, col2, col3, col4= st.columns([1,1,1,1])  
                     with col1:                         

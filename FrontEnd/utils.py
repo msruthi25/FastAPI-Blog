@@ -1,5 +1,10 @@
 import requests
 import streamlit as st
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 def init_session():
     st.session_state.setdefault("logged_in", False)
@@ -22,18 +27,28 @@ def init_session():
 
 def fetch_posts():
     try:
-        response = requests.get("http://127.0.0.1:8000/posts")
+        API_URL=os.getenv("API_URL")
+        response = requests.get(f"{API_URL}/posts")
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
         st.error(f"Failed to fetch posts: {e}")
         return []
     
-def fetch_posts_by_User_ID(user_id):
+def fetch_posts_by_User_ID(user_id,token=None):
     try:
-        url= f"http://127.0.0.1:8000/postsbyUser/{user_id}"
-        response = requests.get(url)
-        response.raise_for_status()
+        API_URL=os.getenv("API_URL")
+        url= f"{API_URL}/postsbyUser/{user_id}"
+        headers = {}
+        if token:             
+            headers = {
+                "Authorization": f"{token['token_type'].capitalize()} {token['access_token']}"
+            }
+        response = requests.get(url, headers=headers)
+        if response.status_code==404:
+            st.warning("No posts created")
+            return []
+        response.raise_for_status()    
         return response.json()
     except requests.RequestException as e:
         st.error(f"Failed to fetch posts: {e}")
@@ -41,7 +56,8 @@ def fetch_posts_by_User_ID(user_id):
     
 def fetch_post_by_id(id):
     try:
-        url= f"http://127.0.0.1:8000/posts/{id}"
+        API_URL=os.getenv("API_URL")
+        url= f"{API_URL}/posts/{id}"
         response = requests.get(url)
         response.raise_for_status()
         return response.json()
@@ -51,7 +67,8 @@ def fetch_post_by_id(id):
 
 def fetch_comments(id):
     try:       
-        url= f"http://127.0.0.1:8000/posts/{id}/comments"
+        API_URL=os.getenv("API_URL")
+        url= f"{API_URL}/posts/{id}/comments"
         response = requests.get(url)
         response.raise_for_status()
         return response.json()
@@ -60,7 +77,8 @@ def fetch_comments(id):
         return []
 
 def add_comment(content,id,token=None):
-    url= f"http://127.0.0.1:8000/posts/{id}/addComment"
+    API_URL=os.getenv("API_URL")
+    url= f"{API_URL}/posts/{id}/addComment"
     data = {
         "content": content
     }
@@ -79,12 +97,13 @@ def add_comment(content,id,token=None):
 
 def create_post(post_data,token=None):
     try:
+        API_URL=os.getenv("API_URL")
         headers = {}
         if token:             
             headers = {
                 "Authorization": f"{token['token_type'].capitalize()} {token['access_token']}"
             }
-        response = requests.post("http://127.0.0.1:8000/createPost", json=post_data,headers=headers)
+        response = requests.post(f"{API_URL}/createPost", json=post_data,headers=headers)
         return response    
     except requests.exceptions.RequestException as e:
         st.error(f"❌ Error connecting to backend: {e}")  
@@ -92,7 +111,8 @@ def create_post(post_data,token=None):
 
 def update_post(id,post_data,token=None):
     try:
-        url= f"http://127.0.0.1:8000/posts/{id}"
+        API_URL=os.getenv("API_URL")
+        url= f"{API_URL}/posts/{id}"
         headers = {}
         if token:             
             headers = {
@@ -106,7 +126,8 @@ def update_post(id,post_data,token=None):
 
 def delete_post(id,token=None):
     try:
-        url= f"http://127.0.0.1:8000/posts/{id}"
+        API_URL=os.getenv("API_URL")
+        url= f"{API_URL}/posts/{id}"
         headers = {}
         if token:             
             headers = {
@@ -121,13 +142,17 @@ def delete_post(id,token=None):
 
 def view_my_comment(user_id,token):     
     try:
-        url= f"http://127.0.0.1:8000/user/{user_id}/comments"
+        API_URL=os.getenv("API_URL")
+        url= f"{API_URL}/user/{user_id}/comments"
         headers = {}
         if token:             
             headers = {
                 "Authorization": f"{token['token_type'].capitalize()} {token['access_token']}"
             }
         response = requests.get(url,headers=headers)
+        if response.status_code==404:
+            st.warning("No Comments created")
+            return []
         response.raise_for_status()
         return response
     except requests.RequestException as e:
@@ -136,7 +161,8 @@ def view_my_comment(user_id,token):
     
 def update_comment(comment_id, post_id,content, token=None):
     try:
-        url= f"http://127.0.0.1:8000//posts/{post_id}/updateComment/{comment_id}"
+        API_URL=os.getenv("API_URL")
+        url= f"{API_URL}/posts/{post_id}/updateComment/{comment_id}"
         headers = {}
         if token:             
             headers = {
@@ -150,7 +176,8 @@ def update_comment(comment_id, post_id,content, token=None):
 
 def delete_comment(id,token=None):
     try:
-        url= f"http://127.0.0.1:8000/deleteComment/{id}"
+        API_URL=os.getenv("API_URL")
+        url= f"{API_URL}/deleteComment/{id}"
         headers = {}
         if token:             
             headers = {
