@@ -1,7 +1,11 @@
 import streamlit as st
 import requests
 from utils import init_session
+import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
 
 init_session()
 
@@ -12,7 +16,8 @@ def login_dialog():
 
     if st.button("Login", key="login_submit"):
         if email  and password:
-            response = requests.post(f"http://127.0.0.1:8000/login", json={"email": email, "password": password})
+            API_URL=os.getenv("API_URL")
+            response = requests.post(f"{API_URL}/login", json={"email": email, "password": password})
             if response.status_code == 200:
                 token = response.json()["access_token"]
                 username=response.json()["username"]
@@ -42,8 +47,9 @@ def signup_dialog():
             st.error("❌ Passwords do not match.")
         elif new_username and email and new_password:
             try:
+                API_URL=os.getenv("API_URL")
                 response = requests.post(
-                    "http://127.0.0.1:8000/register",
+                    f"{API_URL}/register",
                     json={"email": email, "username": new_username, "password": new_password},
                 )                
                 if response.status_code == 200:
