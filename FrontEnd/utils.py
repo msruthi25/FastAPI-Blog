@@ -187,3 +187,27 @@ def delete_comment(id,token=None):
         return response    
     except requests.exceptions.RequestException as e:
         st.error(f"❌ Error connecting to backend: {e}")  
+
+
+#AI Agent Code
+def generate_ai_content(prompt, token):
+    API_URL=os.getenv("API_URL")
+    url= f"{API_URL}/agent"
+    headers = {}
+    payload = {"input":prompt}
+    if token:             
+        headers = {
+            "Authorization": f"{token['token_type'].capitalize()} {token['access_token']}"
+        }
+    
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+        if response.status_code == 200:
+           data = response.json()
+           return {
+                "title": data.get("title", ""),
+                "content": data.get("content", ""),
+                "img_url": data.get("img_url", "")
+            }
+    except Exception as e:
+        return f"Connection Failed: {str(e)}"        

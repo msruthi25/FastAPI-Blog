@@ -1,4 +1,3 @@
-from turtle import pd
 import streamlit as st
 from utils import init_session,view_my_comment, update_comment,delete_comment
 from pages.header import render_header
