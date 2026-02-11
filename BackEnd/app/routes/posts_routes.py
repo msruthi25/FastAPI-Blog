@@ -71,10 +71,7 @@ async def get_post_by_id(id: int, db: AsyncSession = Depends(get_db)):
         log.error("Error fetching post by Post ID", post_id=id, error=str(e))
         raise HTTPException(status_code=500, detail=f"Internal Server Error {str(e)}")
 
-
-# Create Post
-@router.post("/createPost")
-async def create_post(post: PostModel, db: AsyncSession = Depends(get_db), current_user=Depends(token_validation)):
+async def create_post_service(post: PostModel, current_user: dict,db: AsyncSession):
     try:
         post_data = Post(**post.model_dump())
         post_data.author_id = current_user["id"]
@@ -82,10 +79,22 @@ async def create_post(post: PostModel, db: AsyncSession = Depends(get_db), curre
         await db.commit()
         await db.refresh(post_data)
         log.info("Post created successfully", post_id=post_data.id, author_id=post_data.author_id)
+        return post_data
+
+    except Exception as e:
+        log.error("Error creating post", author_id=current_user.get("id"), error=str(e))
+        raise
+
+@router.post("/createPost")
+async def create_post(post: PostModel,current_user = Depends(token_validation),db: AsyncSession = Depends(get_db)):
+    try:
+        await create_post_service(post, current_user,db)
         return {"status": "success"}
     except Exception as e:
-        log.error("Error creating post", author_id=current_user["id"], error=str(e))
-        raise HTTPException(status_code=500, detail=f"Internal Server Error {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal Server Error"
+        )
 
 
 # Update Post

@@ -40,7 +40,7 @@ class PostModel(BaseModel):
     title: str
     content: str
     img_url: str
-    published: bool
+    published: Optional[bool] = None 
 
     model_config = {"from_attributes": True}
 
@@ -92,3 +92,16 @@ class PostUpdateModel(BaseModel):
         allowed_attrs = {"a": ["href", "title"]}
         return bleach.clean(v, tags=allowed_tags, attributes=allowed_attrs)
 
+
+class AIResponse(BaseModel):
+    title: str
+    content :str
+    img_url :str
+
+    model_config = {"from_attributes": True}
+
+    @field_validator("content", mode="before")
+    def sanitize_content(cls, v):
+        allowed_tags = {"p", "b", "i", "u", "strong", "em", "a"}
+        allowed_attrs = {"a": ["href", "title"]}
+        return bleach.clean(v, tags=allowed_tags, attributes=allowed_attrs)

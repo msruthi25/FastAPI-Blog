@@ -11,6 +11,7 @@ from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from ..limiter import limiter
 
+from ..agent.cron.generate_blog import get_system_user
 router = APIRouter() 
 
 
