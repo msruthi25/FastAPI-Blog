@@ -2,7 +2,7 @@ import requests
 import streamlit as st
 import os
 from dotenv import load_dotenv
-
+import base64
 
 load_dotenv()
 
@@ -198,8 +198,7 @@ def generate_ai_content(prompt, token):
     if token:             
         headers = {
             "Authorization": f"{token['token_type'].capitalize()} {token['access_token']}"
-        }
-    
+        }    
     try:
         response = requests.post(url, json=payload, headers=headers)
         if response.status_code == 200:
@@ -211,3 +210,70 @@ def generate_ai_content(prompt, token):
             }
     except Exception as e:
         return f"Connection Failed: {str(e)}"        
+
+
+def analyse_image(image_base64: str, media_type: str, token) -> str:
+    API_URL=os.getenv("API_URL")
+    url = f"{API_URL}/analyse-image"
+    headers = {}
+    if token:
+        headers = {
+            "Authorization": f"{token['token_type'].capitalize()} {token['access_token']}"
+        }
+    try:
+        response = requests.post(url, json={
+            "image_base64": image_base64,
+            "media_type": media_type
+        }, headers=headers)
+        print("DEBUG status:", response.status_code)  # 👈
+        print("DEBUG response:", response.text)  
+        if response.status_code == 200:
+            return response.json().get("description")
+        else:
+            return None
+    except Exception as e:
+        return None        
+
+
+def get_tech_news_stories(token, source="hackernews"):
+    API_URL=os.getenv("API_URL")
+    url = f"{API_URL}/tech-news-stories?source={source}"
+    headers = {}
+    if token:
+        headers = {
+            "Authorization": f"{token['token_type'].capitalize()} {token['access_token']}"
+        }
+    try:
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            return response.json().get("stories", [])
+        return []
+    except Exception as e:
+        return []
+
+
+def generate_from_news(token, title: str, url: str, summary: str, source: str = "hackernews"):
+    API_URL=os.getenv("API_URL")
+    endpoint = f"{API_URL}/generate-from-news"
+    headers = {}
+    if token:
+        headers = {
+            "Authorization": f"{token['token_type'].capitalize()} {token['access_token']}"
+        }
+    try:
+        response = requests.post(endpoint, json={
+            "title": title,
+            "url": url,
+            "summary": summary,
+            "source": source
+        }, headers=headers)
+        if response.status_code == 200:
+            data = response.json()
+            return {
+                "title": data.get("title", ""),
+                "content": data.get("content", ""),
+                "img_url": data.get("img_url", "")
+            }
+        return None
+    except Exception as e:
+        return None

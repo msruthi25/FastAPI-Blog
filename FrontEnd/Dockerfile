@@ -4,6 +4,9 @@ FROM python:3.11-slim
 # Create a non-root user
 RUN adduser --disabled-password --gecos "" myuser
 
+# Install ffmpeg
+RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
+
 # Set working directory inside container
 WORKDIR /app
 
@@ -11,8 +14,8 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
+RUN pip install --no-cache-dir --timeout 300 --retries 5 -r requirements.txt
+RUN python -c "import whisper; whisper.load_model('base')"
 # Copy all your frontend code into the container
 COPY . .
 
