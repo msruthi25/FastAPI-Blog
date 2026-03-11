@@ -11,6 +11,7 @@ dist/
 
 # --- Environment files ---
 .env
+.streamlit-env
 
 # --- OS / Editor junk ---
 .DS_Store
@@ -19,4 +20,9 @@ dist/
 # db
 *.db
 
+.myenv
+
 .vscode/
+
+locustfile.py
+locustagentfile.py
