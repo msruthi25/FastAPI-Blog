@@ -22,7 +22,7 @@ async def greet():
     return {"message": "Home page"}
 
 @router.post("/login")
-@limiter.limit("5/minute")
+@limiter.limit("1000/minute")
 async def login(request: Request, user: UserLogin, db: AsyncSession = Depends(get_db)):
     try:
         result = await db.execute(select(User).filter(User.email == user.email))
