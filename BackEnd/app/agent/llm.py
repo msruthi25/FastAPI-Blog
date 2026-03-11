@@ -4,12 +4,14 @@ import asyncio
 from functools import partial
 from openai import OpenAI
 from dotenv import load_dotenv
+from app.config import settings
 import os
 load_dotenv()
 
+OPEN_ROUTER_API_KEY = settings.openrouter_api_key
 
 client = OpenAI(
-    api_key=os.getenv("OPENROUTER_API_KEY"),
+    api_key=OPEN_ROUTER_API_KEY ,
     base_url="https://openrouter.ai/api/v1"
 )
 def call_llm(prompt: str) -> str:
